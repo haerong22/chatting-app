@@ -8,7 +8,11 @@ import org.springframework.web.servlet.ModelAndView;
 public class WebSocketController {
 	
 	@RequestMapping("/chat.do")
-	public ModelAndView chatViewPage() {
-		return new ModelAndView("chat");
+	public ModelAndView chatViewPage(String userName) {
+		return new ModelAndView("views/chat", "userName", userName);
+	}
+	@RequestMapping("/chatList.do")
+	public ModelAndView chatListViewPage() {
+		return new ModelAndView("views/chatlist");
 	}
 }

@@ -1,0 +1,55 @@
+@charset "UTF-8";
+
+body {
+	margin: 0;
+}
+
+
+/* chatting room */
+footer {
+	position: fixed;
+	left: 0; bottom: 0;
+	width: 100%;
+}
+.container {
+	display: flex;
+	justify-content: space-between;
+	flex-direction: column;
+	height: 100%;
+	background-color: beige;
+}
+
+.navbar {
+	display: flex;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	justify-content: space-between;
+	align-items: center;
+	background-color: yellow;
+	opacity: 0.9;
+}
+.reciever {
+	padding: 8px 12px;
+}
+.back {
+	padding-left: 12px;
+}
+.option {
+	padding-right: 12px;
+}
+.msg-box {
+	padding-bottom: 50px;
+}
+
+.msg-send {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: yellow;
+	padding: 8px 0px;
+}
+
+#msg {
+	flex-grow: 1;
+}
