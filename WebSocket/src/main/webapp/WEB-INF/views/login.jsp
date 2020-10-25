@@ -9,11 +9,14 @@
 <title>채팅방 리스트</title>
 </head>
 <body>
-	<form method="post" action="/websocket/chat.do">
-		<div>
-			<input id="user-name" name="userName" type="text" required placeholder="아이디 입력"><button id="btn-name">확인</button> 	
-		</div>
-		<div id="chatroom"></div>
+	<div class="welcome-box">
+		<h2>환영합니다!</h2>
+		<p>아이디를 입력하고 채팅에 참여하세요.</p>		
+	</div>
+	<form id="login-form" method="post" action="/websocket/chat.do">
+		<input id="user-name" name="userName" type="text" required placeholder="아이디 입력">
+		<button id="btn-name">로그인</button>
+		<a class="find" href="#">아이디 / 비밀번호 찾기</a> 	
 	</form>
 </body>
 <script>

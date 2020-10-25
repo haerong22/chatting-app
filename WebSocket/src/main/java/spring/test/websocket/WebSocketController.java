@@ -1,5 +1,7 @@
 package spring.test.websocket;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -8,11 +10,12 @@ import org.springframework.web.servlet.ModelAndView;
 public class WebSocketController {
 	
 	@RequestMapping("/chat.do")
-	public ModelAndView chatViewPage(String userName) {
+	public ModelAndView chatViewPage(String userName, HttpServletRequest req) {
+		req.getSession().setAttribute("userName", userName);
 		return new ModelAndView("views/chat", "userName", userName);
 	}
-	@RequestMapping("/chatList.do")
+	@RequestMapping("/login.do")
 	public ModelAndView chatListViewPage() {
-		return new ModelAndView("views/chatlist");
+		return new ModelAndView("views/login");
 	}
 }

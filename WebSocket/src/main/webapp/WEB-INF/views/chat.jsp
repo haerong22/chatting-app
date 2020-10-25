@@ -57,6 +57,16 @@
 		ws.send(nickname + " : " + msg);
 		
 	}
+	
+	document.querySelector('.fa-chevron-left')
+		.addEventListener('click', () => {
+			location.href='/websocket/chatList.do';
+		})
+	document.getElementById('msg').addEventListener('keydown', e => {
+		if(e.keyCode == 13) {
+			document.getElementById('btn-send').click();
+		}
+	})
 	document.getElementById('btn-send').addEventListener('click', sendMessage);
 	connect();
 </script>

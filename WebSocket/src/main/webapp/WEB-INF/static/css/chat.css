@@ -1,11 +1,63 @@
 @charset "UTF-8";
+* {
+	outline: none;
+}
 
 body {
 	margin: 0;
 }
+/* login-form */
+#login-form {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;	
+	margin: 30px 20px;
+}
 
+#login-form * {
+	height: 50px;
+	margin-bottom: 20px;
+	font-size: 15px;
+	padding: 5px 10px;	
+	border: none;
+}
 
-/* chatting room */
+#user-name {
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+#user-name:focus {
+	border-bottom-color: #fae100;
+}
+
+#btn-name {
+	background-color: #fae100;
+	border-radius: 5px;
+	font-weight: bold;
+}
+
+#login-form .find {
+	font-size: 10px;
+	text-align: center;
+	text-decoration: none;
+	color: #2e363e;
+	opacity: 0.9;
+}
+
+.welcome-box {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	text-align: center;
+	margin: 100px 20px; 
+}
+
+.welcome-box p {
+	font-size: 15px;
+	opacity: 0.7;
+}
+
+/* chat-room */
 footer {
 	position: fixed;
 	left: 0; bottom: 0;
@@ -16,7 +68,7 @@ footer {
 	justify-content: space-between;
 	flex-direction: column;
 	height: 100%;
-	background-color: beige;
+	background-color: #abc1d1;
 }
 
 .navbar {
@@ -26,9 +78,21 @@ footer {
 	width: 100%;
 	justify-content: space-between;
 	align-items: center;
-	background-color: yellow;
+	background-color: #abc1d1;
 	opacity: 0.9;
+	font-size: 15px;
+	height: 50px;
 }
+
+.navbar .reciever {
+	font-size: 20px;
+}
+
+.navbar i {
+	font-size: 20px;
+	cursor: pointer;
+}
+
 .reciever {
 	padding: 8px 12px;
 }
@@ -39,17 +103,34 @@ footer {
 	padding-right: 12px;
 }
 .msg-box {
-	padding-bottom: 50px;
+	padding: 30px 5px 60px 5px;
 }
 
 .msg-send {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	background-color: yellow;
+	background-color: #f9f9fa;
 	padding: 8px 0px;
+	border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+#btn-send {
+	height: 40px;	
+	font-size: 15px;
+	margin-right: 12px;
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	border-radius: 10px;
+	cursor: pointer;
 }
 
 #msg {
+	outline: none;
+	height: 40px;
+	font-size: 15px;
 	flex-grow: 1;
+	margin: 0px 12px;
+	border-radius: 20px;
+	padding: 5px 20px;
+	border: 1px solid rgba(0, 0, 0, 0.2);
 }
