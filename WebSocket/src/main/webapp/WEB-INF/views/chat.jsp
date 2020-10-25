@@ -23,7 +23,6 @@
 		</div>
 	</nav>
 	<div id="msg-box" class="msg-box">
-		
 	</div>
 	<footer>
 		<div class="msg-send">	
@@ -42,9 +41,21 @@
 		}
 		ws.onmessage = msg => {
 			let msgBox = document.getElementById('msg-box');
+			let addmsg = '';
+			let jsonmsg = JSON.parse(msg.data);
+			if(jsonmsg.writer === nickname) {
+				addmsg += '<div class="message-row-own">';
+				addmsg += '<span>' + jsonmsg.message + '</span>';
+				addmsg += '<span>22:07</span></div>';
+ 			} else {
+	 			addmsg += '<div class="message-row">';
+	 			addmsg += '<span>' + jsonmsg.writer + '</span>';
+	 			addmsg += '<span>' + jsonmsg.message + '</span>';
+	 			addmsg += '<span>22:07</span></div>';
+ 			}
 			console.log(msg);
 			console.log(msg.data);
-			msgBox.innerHTML = msgBox.innerHTML + "<br>" + msg.data; 
+			msgBox.innerHTML += addmsg; 
 			document.getElementById('msg').value = '';
 		}
 		ws.close = () => {
@@ -54,13 +65,16 @@
 	
 	const sendMessage = function() {
 		let msg = document.getElementById('msg').value;
-		ws.send(nickname + " : " + msg);
+		ws.send(JSON.stringify({
+			writer : nickname,
+			message : msg,
+		}));
 		
 	}
 	
 	document.querySelector('.fa-chevron-left')
 		.addEventListener('click', () => {
-			location.href='/websocket/chatList.do';
+			location.href='/websocket/login.do';
 		})
 	document.getElementById('msg').addEventListener('keydown', e => {
 		if(e.keyCode == 13) {

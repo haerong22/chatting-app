@@ -1,7 +1,9 @@
 package spring.test.websocket;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.CloseStatus;
@@ -9,10 +11,14 @@ import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.util.JSONPObject;
+
 @Component
 public class ChatHandler extends TextWebSocketHandler {
 	private final List<WebSocketSession> users = new ArrayList<>();
-	
+	private final ObjectMapper objectMapper = new ObjectMapper();
 	// 소켓 연결 후 실행
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
@@ -24,11 +30,15 @@ public class ChatHandler extends TextWebSocketHandler {
 	// 메시지 수신 후 
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
+		String msg = message.getPayload();
 		System.out.println("세션 : " + message);
 		System.out.println("메시지 : " + message.getPayload());
+		ChatDTO chatDto = objectMapper.readValue(msg, ChatDTO.class);
+		System.out.println(chatDto.getMessage());
+		System.out.println(chatDto.getWriter());
 		for(WebSocketSession user : users) {
 			System.out.println(user);
-			user.sendMessage(new TextMessage(message.getPayload()));
+			user.sendMessage(new TextMessage(msg));
 		}
 		
 	}

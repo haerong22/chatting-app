@@ -104,6 +104,15 @@ footer {
 }
 .msg-box {
 	padding: 30px 5px 60px 5px;
+	display: flex;
+	flex-direction: column;
+}
+.message-row {
+	display: flex;
+}
+.message-row-own {
+	display: flex;
+	flex-direction: row-reverse;
 }
 
 .msg-send {
@@ -124,7 +133,7 @@ footer {
 	cursor: pointer;
 }
 
-#msg {
+.msg-send #msg {
 	outline: none;
 	height: 40px;
 	font-size: 15px;
