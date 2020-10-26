@@ -25,7 +25,6 @@ public class ChatHandler extends TextWebSocketHandler {
 		users.add(session);
 	}
 	
-	
 	// 메시지 수신 후 
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
@@ -33,12 +32,18 @@ public class ChatHandler extends TextWebSocketHandler {
 		System.out.println("세션 : " + message);
 		System.out.println("메시지 : " + message.getPayload());
 		ChatDTO chatDto = objectMapper.readValue(msg, ChatDTO.class);
-		System.out.println(chatDto.getMessage());
-		System.out.println(chatDto.getWriter());
-		for(WebSocketSession user : users) {
-			System.out.println(user.getId());
-			user.sendMessage(new TextMessage(msg));
+		switch (chatDto.getType()) {
+		case CHAT : {
+			for(WebSocketSession user : users) {
+				System.out.println(user.getId());
+				user.sendMessage(new TextMessage(msg));
+			}
+			break;
 		}
+		default:
+			break;
+		}
+		
 		
 	}
 	

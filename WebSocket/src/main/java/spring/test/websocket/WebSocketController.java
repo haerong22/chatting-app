@@ -18,4 +18,9 @@ public class WebSocketController {
 	public ModelAndView chatListViewPage() {
 		return new ModelAndView("views/login");
 	}
+	
+	@RequestMapping("/joinForm.do")
+	public String joinFormViewPage() {
+		return "views/joinForm";
+	}
 }

@@ -6,6 +6,7 @@
 body {
 	margin: 0;
 }
+
 /* login-form */
 #login-form {
 	display: flex;
@@ -108,8 +109,9 @@ footer {
 	flex-direction: column;
 	animation: fadeIn 0.8s linear;
 }
-.message-row {
+.msg-box .message-row {
 	display: flex;
+	margin: 3px;
 }
 
 .message-row .message-contents {

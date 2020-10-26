@@ -16,7 +16,7 @@
 	<form id="login-form" method="post" action="/websocket/chat.do">
 		<input id="user-name" autofocus name="userName" type="text" required placeholder="아이디 입력">
 		<button id="btn-name">로그인</button>
-		<a class="find" href="#">아이디 / 비밀번호 찾기</a> 	
+		<a class="find" href="/websocket/joinForm.do">회원가입</a> 	
 	</form>
 </body>
 <script>
