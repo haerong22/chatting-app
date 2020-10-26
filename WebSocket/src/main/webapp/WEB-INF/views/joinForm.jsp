@@ -10,17 +10,17 @@
 <body>
 
 <div class="join-box">
-		<h2>환영합니다!</h2>
+		<h2>회원가입</h2>
 		<p>회원가입 후 서비스 이용가능 합니다.</p>		
 </div>
 
-<form id="join-form" action="">
-	<input type="text" autofocus required placeholder="아이디 입력">
-	<input type="text" required placeholder="비밀번호 입력">
-	<input type="text" required placeholder="비밀번호  재입력">
+<form id="join-form" action="/websocket/joinPro.do">
+	<input name="userId" type="text" autofocus required placeholder="아이디 입력">
+	<input name="userPassword" type="password" required placeholder="비밀번호 입력">
+	<input type="password" required placeholder="비밀번호  재입력">
 	<div class="join-form-btn">
 		<button class="join-btn">가입</button>
-		<button type="button">취소</button>
+		<button type="button" onclick="location.href='/websocket/login.do'">취소</button>
 	</div>
 </form>
 
