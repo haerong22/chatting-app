@@ -11,14 +11,13 @@ import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.util.JSONPObject;
 
 @Component
 public class ChatHandler extends TextWebSocketHandler {
 	private final List<WebSocketSession> users = new ArrayList<>();
 	private final ObjectMapper objectMapper = new ObjectMapper();
+	private final Map<String, WebSocketSession> user = new HashMap<>();
 	// 소켓 연결 후 실행
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
@@ -37,7 +36,7 @@ public class ChatHandler extends TextWebSocketHandler {
 		System.out.println(chatDto.getMessage());
 		System.out.println(chatDto.getWriter());
 		for(WebSocketSession user : users) {
-			System.out.println(user);
+			System.out.println(user.getId());
 			user.sendMessage(new TextMessage(msg));
 		}
 		

@@ -14,7 +14,7 @@
 		<p>아이디를 입력하고 채팅에 참여하세요.</p>		
 	</div>
 	<form id="login-form" method="post" action="/websocket/chat.do">
-		<input id="user-name" name="userName" type="text" required placeholder="아이디 입력">
+		<input id="user-name" autofocus name="userName" type="text" required placeholder="아이디 입력">
 		<button id="btn-name">로그인</button>
 		<a class="find" href="#">아이디 / 비밀번호 찾기</a> 	
 	</form>

@@ -103,16 +103,72 @@ footer {
 	padding-right: 12px;
 }
 .msg-box {
-	padding: 30px 5px 60px 5px;
+	padding: 50px 5px 60px 5px;
 	display: flex;
 	flex-direction: column;
+	animation: fadeIn 0.8s linear;
 }
 .message-row {
 	display: flex;
 }
+
+.message-row .message-contents {
+	margin-left: 3px;
+}
+
+.message-contents .message-info {
+	display: flex;
+	margin-top: 3px;
+}
+
+.message-contents .message-writer {
+	font-size: 12px;
+}
+
+.message-info .message-time {
+	display: flex;
+	opacity: 0.8;
+	font-size: 10px;
+	margin-left: 3px;
+	flex-direction: column-reverse;
+}
+
+.message-info .message {
+	background-color: #f9f9fa;
+	padding: 5px 10px;
+	border-radius: 15px;
+	border-top-left-radius: 0px;
+}
+
+#msg-box .profile-img {
+	width: 50px;
+	height: 50px;
+	border-radius: 100px;
+}
+
+
 .message-row-own {
 	display: flex;
-	flex-direction: row-reverse;
+	justify-content: flex-end;
+	margin: 3px;
+}
+.message-row-own .message-info-own{
+	display: flex;	
+}
+
+.message-info-own .message-own {
+	background-color: #fae100;
+	padding: 5px 10px;
+	border-radius: 15px;
+	border-top-right-radius: 0px;
+}
+
+.message-info-own .message-time {
+	display: flex;
+	opacity: 0.8;
+	font-size: 10px;
+	margin-right: 3px;
+	flex-direction: column-reverse;
 }
 
 .msg-send {

@@ -26,7 +26,7 @@
 	</div>
 	<footer>
 		<div class="msg-send">	
-			<input id="msg" type="text" placeholder="메시지 입력"><button id="btn-send" type="button">전송</button>
+			<input id="msg" type="text" autofocus placeholder="메시지 입력"><button id="btn-send" type="button">전송</button>
 		</div>
 	</footer>
 </div>
@@ -45,15 +45,20 @@
 			let jsonmsg = JSON.parse(msg.data);
 			if(jsonmsg.writer === nickname) {
 				addmsg += '<div class="message-row-own">';
-				addmsg += '<span>' + jsonmsg.message + '</span>';
-				addmsg += '<span>22:07</span></div>';
+				addmsg += '<div class="message-info-own">';
+				addmsg += '<span class="message-time">22:07</span>'
+				addmsg += '<span class="message-own">' + jsonmsg.message + '</span>';
+				addmsg += '</div></div>';
  			} else {
-	 			addmsg += '<div class="message-row">';
-	 			addmsg += '<span>' + jsonmsg.writer + '</span>';
-	 			addmsg += '<span>' + jsonmsg.message + '</span>';
-	 			addmsg += '<span>22:07</span></div>';
+ 				addmsg += '<div class="message-row">'
+ 				addmsg += '<img class="profile-img" alt="profile" src="static/images/profile.jpg">'
+ 				addmsg += '<div class="message-contents">'
+ 				addmsg += '<span class="message-writer">' + jsonmsg.writer + '</span>'
+ 		 		addmsg += '<div class="message-info">'
+ 		 		addmsg += '<span class="message">'+ jsonmsg.message + '</span>'
+ 		 		addmsg += '<span class="message-time">22:07</span>'
+ 		 		addmsg += '</div></div></div>'
  			}
-			console.log(msg);
 			console.log(msg.data);
 			msgBox.innerHTML += addmsg; 
 			document.getElementById('msg').value = '';
