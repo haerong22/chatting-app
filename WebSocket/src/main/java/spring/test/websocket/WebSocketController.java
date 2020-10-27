@@ -1,15 +1,8 @@
 package spring.test.websocket;
 
-import static org.hamcrest.CoreMatchers.instanceOf;
-
-import java.util.HashMap;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -19,9 +12,13 @@ public class WebSocketController {
 	@Autowired
 	private ChatService service;
 	
+	@RequestMapping("/friends.do")
+	public String friendsListViewPage() {
+		return "views/friends";
+	}
+	
 	@RequestMapping("/chat.do")
-	public ModelAndView chatViewPage(String userName, HttpServletRequest req) {
-		req.getSession().setAttribute("userName", userName);
+	public ModelAndView chatViewPage(String userName) {
 		return new ModelAndView("views/chat", "userName", userName);
 	}
 	@RequestMapping("/login.do")
@@ -41,10 +38,11 @@ public class WebSocketController {
 	}
 	
 	@RequestMapping("/loginPro.do")
-	public ModelAndView login(String userId, String userPassword) {
+	public ModelAndView login(String userId, String userPassword, HttpServletRequest req) {
 		int result = service.loginCheck(userId, userPassword);
 		if(result == 1) {
-			return new ModelAndView("redirect: chat.do", "userName", userId);
+			req.getSession().setAttribute("userName", userId);
+			return new ModelAndView("views/friends", "userName", userId);
 		} 
 		return new ModelAndView("views/login");
 	}

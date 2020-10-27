@@ -56,7 +56,7 @@ const sendMessage = function() {
 const ready = function() {
 	document.querySelector('.fa-chevron-left')
 		.addEventListener('click', () => {
-			location.href='/websocket/login.do';
+			location.href='/websocket/friends.do';
 		})
 	document.getElementById('msg').addEventListener('keydown', e => {
 		if(e.keyCode == 13) {
