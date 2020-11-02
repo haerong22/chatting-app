@@ -1,10 +1,14 @@
 package spring.test.websocket;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -45,5 +49,14 @@ public class WebSocketController {
 			return new ModelAndView("views/friends", "userName", userId);
 		} 
 		return new ModelAndView("views/login");
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/findUser.do",
+			method=RequestMethod.GET)
+	public List<UserDTO> findUser(String search) {
+		System.out.println(":" + search + ":");
+		List<UserDTO> users = service.findUser(search);
+		return users;
 	}
 }

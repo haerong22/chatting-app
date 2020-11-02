@@ -1,6 +1,7 @@
 package spring.test.websocket;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,11 @@ import org.springframework.stereotype.Service;
 public class ChatServiceImpl implements ChatService {
 	@Autowired
 	private ChatDAO dao;
+	
+	@Override
+	public List<UserDTO> findUser(String search) {
+		return dao.findUser(search);
+	}
 	
 	@Override
 	public void insertMember(String userId, String userPassword) {

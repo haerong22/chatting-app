@@ -5,6 +5,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/friends.css"><title>Insert title here</title>
+	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 	<script src="https://kit.fontawesome.com/5b3cf06972.js" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -38,11 +39,37 @@
 			<span><i class="fas fa-ellipsis-h"></i></span>
 		</div>
 	</footer>
+	
+	<div class="modal hidden">
+		<div class="modal-overlay"></div>
+		<div class="modal-content">
+			<i class="fas fa-times"></i>
+			<h4>친구 추가</h4>
+			<input id="search" placeholder="아이디 검색">
+			<div class="search-user"></div>
+		</div>
+	</div>
 </body>
 <script>
+const addFriendsBtn = document.querySelector('.fa-plus');
+const addFriendsModal = document.querySelector('.modal');
+const cancleModal = document.querySelector('.fa-times');
+const findUser = document.getElementById('search');
+addFriendsBtn.addEventListener('click', () => {
+	addFriendsModal.classList.remove('hidden');
+})
+cancleModal.addEventListener('click', () => {
+	addFriendsModal.classList.add('hidden');
+})
+
 document.querySelector('.friends-list')
 	.addEventListener('click', () => {
 		location.href='/websocket/chat.do?userName=' + "${userName}";
 	});
+findUser.addEventListener('keyup', () => {
+	$.get("/websocket/findUser.do?search=" + findUser.value, function(data){
+		console.log(data);
+	});	
+})
 </script>
 </html>

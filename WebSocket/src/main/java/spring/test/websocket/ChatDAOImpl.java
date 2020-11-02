@@ -1,6 +1,8 @@
 package spring.test.websocket;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -14,6 +16,18 @@ import org.springframework.stereotype.Repository;
 public class ChatDAOImpl implements ChatDAO {
 	@Autowired
 	MongoTemplate mongoTemplate;
+	
+	@Override
+	public List<UserDTO> findUser(String search) {
+		Query query = new Query();
+		List<UserDTO> users = new ArrayList<>();
+		if(search != null && !search.equals("")) {
+			query.addCriteria(Criteria.where("userId").regex(".*"+search+".*", "i"));
+			users =	Optional.ofNullable(mongoTemplate.find(query, UserDTO.class, "user"))
+					.orElseGet(()-> null);
+		}
+		return users;
+	}
 	
 	@Override
 	public void insertMember(Map<String, String> user) {
