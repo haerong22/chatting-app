@@ -13,8 +13,8 @@ public class ChatServiceImpl implements ChatService {
 	private ChatDAO dao;
 	
 	@Override
-	public List<UserDTO> findUser(String search) {
-		return dao.findUser(search);
+	public List<UserDTO> findUser(String search, String userName) {
+		return dao.findUser(search, userName);
 	}
 	
 	@Override

@@ -9,6 +9,6 @@ public interface ChatDAO {
 
 	public int loginCheck(String userId, String userPassword);
 
-	public List<UserDTO> findUser(String search);
+	public List<UserDTO> findUser(String search, String userName);
 
 }

@@ -68,7 +68,14 @@ document.querySelector('.friends-list')
 	});
 findUser.addEventListener('keyup', () => {
 	$.get("/websocket/findUser.do?search=" + findUser.value, function(data){
-		console.log(data);
+		let users = '';
+		let list = document.querySelector('.search-user')
+		list.innerHTML = '';
+		data.map(value => {
+			users += '<div class="users">' + value.userId 
+					+ '<i class="fas fa-user-plus"></i></div>';	
+		})
+		list.innerHTML = users;
 	});	
 })
 </script>

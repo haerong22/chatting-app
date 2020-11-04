@@ -18,11 +18,12 @@ public class ChatDAOImpl implements ChatDAO {
 	MongoTemplate mongoTemplate;
 	
 	@Override
-	public List<UserDTO> findUser(String search) {
-		Query query = new Query();
+	public List<UserDTO> findUser(String search, String userName) {
 		List<UserDTO> users = new ArrayList<>();
 		if(search != null && !search.equals("")) {
-			query.addCriteria(Criteria.where("userId").regex(".*"+search+".*", "i"));
+			Query query = new Query(new Criteria().andOperator(
+					Criteria.where("userId").regex(".*"+ search +".*", "i"),
+					Criteria.where("userId").nin(userName)));
 			users =	Optional.ofNullable(mongoTemplate.find(query, UserDTO.class, "user"))
 					.orElseGet(()-> null);
 		}

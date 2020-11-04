@@ -54,9 +54,9 @@ public class WebSocketController {
 	@ResponseBody
 	@RequestMapping(value="/findUser.do",
 			method=RequestMethod.GET)
-	public List<UserDTO> findUser(String search) {
-		System.out.println(":" + search + ":");
-		List<UserDTO> users = service.findUser(search);
+	public List<UserDTO> findUser(String search, HttpServletRequest req) {
+		String userName = (String) req.getSession().getAttribute("userName");
+		List<UserDTO> users = service.findUser(search, userName);
 		return users;
 	}
 }
