@@ -13,6 +13,16 @@ public class ChatServiceImpl implements ChatService {
 	private ChatDAO dao;
 	
 	@Override
+	public UserDTO getUserInfo(String userId) {
+		return dao.getUserInfo(userId);
+	}
+	
+	@Override
+	public int addFriends(UserDTO userDto) {
+		return dao.addFriends(userDto);
+	}
+	
+	@Override
 	public List<UserDTO> findUser(String search, String userName) {
 		return dao.findUser(search, userName);
 	}

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -23,13 +25,15 @@
 			<img class="user-img" alt="profile" src="static/images/profile.jpg">
 			<h2 class="user-name">${userName}</h2>
 		</div>
-		<div class="friends-list">
-			<div class="friend-info">
-				<img class="friend-img" alt="profile" src="static/images/profile.jpg">
-				<h2 class="friend-name">friend-name</h2>
+		<c:forEach var="friend" items="${userInfo.friends}">
+			<div class="friends-list">
+				<div class="friend-info">
+					<img class="friend-img" alt="profile" src="static/images/profile.jpg">
+					<h2 class="friend-name">${friend}</h2>
+				</div>
+				<span><i class="fas fa-chevron-right"></i></span>
 			</div>
-			<span><i class="fas fa-chevron-right"></i></span>
-		</div>
+		</c:forEach>
 	</div>
 	<footer class="nav">
 		<div class="nav-contents">
@@ -55,6 +59,10 @@ const addFriendsBtn = document.querySelector('.fa-plus');
 const addFriendsModal = document.querySelector('.modal');
 const cancleModal = document.querySelector('.fa-times');
 const findUser = document.getElementById('search');
+
+const addFriends = val => {
+	location.href="/websocket/addFriends.do?searchId=" + val;
+}
 addFriendsBtn.addEventListener('click', () => {
 	addFriendsModal.classList.remove('hidden');
 })
@@ -72,11 +80,12 @@ findUser.addEventListener('keyup', () => {
 		let list = document.querySelector('.search-user')
 		list.innerHTML = '';
 		data.map(value => {
-			users += '<div class="users">' + value.userId 
+			users += '<div class="users" onclick="addFriends(this.innerText)">' + value.userId 
 					+ '<i class="fas fa-user-plus"></i></div>';	
 		})
 		list.innerHTML = users;
 	});	
 })
+
 </script>
 </html>

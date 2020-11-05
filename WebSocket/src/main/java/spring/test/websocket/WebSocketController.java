@@ -16,9 +16,18 @@ public class WebSocketController {
 	@Autowired
 	private ChatService service;
 	
+	@RequestMapping("/addFriends.do")
+	public String addFriends(UserDTO userDto, HttpServletRequest req) {
+		userDto.setUserId((String) req.getSession().getAttribute("userName"));
+		int result = service.addFriends(userDto);
+		return "redirect: friends.do";
+	}
+	
 	@RequestMapping("/friends.do")
-	public String friendsListViewPage() {
-		return "views/friends";
+	public ModelAndView friendsListViewPage(HttpServletRequest req) {
+		String userId = (String) req.getSession().getAttribute("userName");
+		UserDTO userInfo = service.getUserInfo(userId);
+		return new ModelAndView("views/friends", "userInfo", userInfo);
 	}
 	
 	@RequestMapping("/chat.do")
@@ -46,7 +55,7 @@ public class WebSocketController {
 		int result = service.loginCheck(userId, userPassword);
 		if(result == 1) {
 			req.getSession().setAttribute("userName", userId);
-			return new ModelAndView("views/friends", "userName", userId);
+			return new ModelAndView("redirect: friends.do", "userName", userId);
 		} 
 		return new ModelAndView("views/login");
 	}

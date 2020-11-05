@@ -10,12 +10,31 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public class ChatDAOImpl implements ChatDAO {
 	@Autowired
 	MongoTemplate mongoTemplate;
+	
+	@Override
+	public UserDTO getUserInfo(String userId) {
+		Query query = new Query()
+				.addCriteria(Criteria.where("userId").in(userId));
+		UserDTO friends = mongoTemplate.findOne(query, UserDTO.class, "user");
+		return friends;
+	}
+	
+	@Override
+	public int addFriends(UserDTO userDto) {
+		Query query = new Query()
+				.addCriteria(Criteria.where("userId").in(userDto.getUserId()));
+		Update update = new Update()
+				.addToSet("friends", userDto.getSearchId());
+		mongoTemplate.updateFirst(query, update, "user");
+		return 1;
+	}
 	
 	@Override
 	public List<UserDTO> findUser(String search, String userName) {

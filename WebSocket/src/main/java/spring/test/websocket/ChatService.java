@@ -10,4 +10,8 @@ public interface ChatService {
 
 	public List<UserDTO> findUser(String search, String userName);
 
+	public int addFriends(UserDTO userDto);
+
+	public UserDTO getUserInfo(String userId);
+
 }
