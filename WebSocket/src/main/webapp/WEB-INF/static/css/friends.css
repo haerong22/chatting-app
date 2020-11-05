@@ -137,10 +137,18 @@ i {
 
 .search-user .users {
 	margin: 3px 0;
+	padding: 0px 100px;
+	display: flex;
+	justify-content: space-between;
 }
 
 .search-user .fa-user-plus {
 	margin-left: 20px;
+}
+.search-user .fa-user-friends {
+	margin-left: 20px;
+	cursor: default;
+	color: green;
 }
 
 .hidden {

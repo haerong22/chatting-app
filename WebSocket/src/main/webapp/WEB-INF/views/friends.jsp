@@ -25,6 +25,7 @@
 			<img class="user-img" alt="profile" src="static/images/profile.jpg">
 			<h2 class="user-name">${userName}</h2>
 		</div>
+		<div class="friends-list"></div>
 		<c:forEach var="friend" items="${userInfo.friends}">
 			<div class="friends-list">
 				<div class="friend-info">
@@ -59,6 +60,7 @@ const addFriendsBtn = document.querySelector('.fa-plus');
 const addFriendsModal = document.querySelector('.modal');
 const cancleModal = document.querySelector('.fa-times');
 const findUser = document.getElementById('search');
+let friends = document.querySelectorAll('.friend-info > h2');
 
 const addFriends = val => {
 	location.href="/websocket/addFriends.do?searchId=" + val;
@@ -80,12 +82,20 @@ findUser.addEventListener('keyup', () => {
 		let list = document.querySelector('.search-user')
 		list.innerHTML = '';
 		data.map(value => {
+			let b = true;
+			for(let i=0; i<friends.length; i++) {
+				console.log(friends[i].innerText)
+				if(friends[i].innerText == value.userId) b = false;  
+			}
+			b ? 
 			users += '<div class="users" onclick="addFriends(this.innerText)">' + value.userId 
-					+ '<i class="fas fa-user-plus"></i></div>';	
+					+ '<i class="fas fa-user-plus"></i></div>':
+			users += '<div class="users">' + value.userId 
+			+ '<i class="fas fa-user-friends"></i></div>';
 		})
 		list.innerHTML = users;
 	});	
 })
-
+console.log(friends);
 </script>
 </html>
