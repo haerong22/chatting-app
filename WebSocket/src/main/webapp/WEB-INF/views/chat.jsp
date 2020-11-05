@@ -18,7 +18,7 @@
 		<div class="back">
 			<a><i class="fas fa-chevron-left"></i></a>
 		</div>
-		<div class="reciever">Nickname</div>
+		<div class="reciever">${friendName}</div>
 		<div class="option">
 			<a><i class="fas fa-cog"></i></a>
 		</div>
@@ -33,7 +33,8 @@
 </div>
 </body>
 <script>
-	connect("${userName}");
+	connect("${userName}","${friendName}");
+	console.log("${friendName}");
 	ready();
 </script>
 </html>

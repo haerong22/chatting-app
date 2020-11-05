@@ -34,8 +34,13 @@ public class WebSocketController {
 	}
 	
 	@RequestMapping("/chat.do")
-	public ModelAndView chatViewPage(String userName) {
-		return new ModelAndView("views/chat", "userName", userName);
+	public ModelAndView chatViewPage(String friendName, HttpServletRequest req) {
+		String userId = (String) req.getSession().getAttribute("userName");
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("views/chat");
+		mav.addObject("friendName",friendName);
+		mav.addObject("userName", userId);
+		return mav;
 	}
 	@RequestMapping("/login.do")
 	public ModelAndView chatListViewPage() {

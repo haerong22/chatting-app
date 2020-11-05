@@ -3,6 +3,7 @@ package spring.test.websocket;
 public class ChatDTO {
 	private String writer;
 	private String message;
+	private String reciever;
 	private MessageType type;
 	
 	public enum MessageType {
@@ -32,10 +33,18 @@ public class ChatDTO {
 	public void setType(MessageType type) {
 		this.type = type;
 	}
+	
+	public String getReciever() {
+		return reciever;
+	}
+
+	public void setReciever(String reciever) {
+		this.reciever = reciever;
+	}
 
 	@Override
 	public String toString() {
-		return "ChatDTO [writer=" + writer + ", message=" + message + ", type=" + type + "]";
+		return "ChatDTO [writer=" + writer + ", message=" + message + ", reciever=" + reciever + ", type=" + type + "]";
 	}
 	
 }

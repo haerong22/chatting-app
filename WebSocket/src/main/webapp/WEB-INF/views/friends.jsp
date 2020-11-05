@@ -28,7 +28,7 @@
 		<div class="friends-container">
 			<div class="friends-list"></div>
 			<c:forEach var="friend" items="${userInfo.friends}">
-				<div class="friends-list">
+				<div class="friends-list" onclick="location.href='/websocket/chat.do?friendName=${friend}'">
 					<div class="friend-info">
 						<img class="friend-img" alt="profile" src="static/images/profile.jpg">
 						<h2 class="friend-name">${friend}</h2>
@@ -68,8 +68,6 @@ let friends = document.querySelectorAll('.friend-info > h2');
 const addFriends = val => {
 	$.get("/websocket/addFriends.do?searchId=" + val, (data) => {
 		let friends = '';
-		console.log(data);
-		console.log(data.friends)
 		friendscontainer.innerHTML = '';
 		data.friends.map(value => {
 			friends += '<div class="friends-list"><div class="friend-info">'
@@ -100,7 +98,6 @@ findUser.addEventListener('keyup', () => {
 		data.map(value => {
 			let b = true;
 			for(let i=0; i<friends.length; i++) {
-				console.log(friends[i].innerText)
 				if(friends[i].innerText == value.userId) b = false;  
 			}
 			b ? 
@@ -112,6 +109,5 @@ findUser.addEventListener('keyup', () => {
 		list.innerHTML = users;
 	});	
 })
-console.log(friends);
 </script>
 </html>

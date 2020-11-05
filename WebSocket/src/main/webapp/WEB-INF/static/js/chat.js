@@ -1,12 +1,15 @@
 let ws;
 let nickname;
-const connect = function(userName) {
+let recieverName;
+const connect = function(userName, friendName) {
 	ws = new WebSocket('ws://localhost:8088/websocket/chat');
 	nickname = userName;
+	recieverName = friendName;
 	ws.onopen = () => {
 		console.log(nickname + '연결됨');
 		ws.send(JSON.stringify({
 			writer : nickname,
+			reciever : friendName,
 			type : 'ENTER'
 		}));
 	}
@@ -38,6 +41,7 @@ const connect = function(userName) {
 		console.log('연결종료');
 		ws.send(JSON.stringify({
 			writer : nickname,
+			reciever : friendName,
 			type : 'LEAVE'
 		}));
 	}
@@ -48,6 +52,7 @@ const sendMessage = function() {
 	ws.send(JSON.stringify({
 		writer : nickname,
 		message : msg,
+		reciever : recieverName,
 		type : 'CHAT'
 	}));
 	
