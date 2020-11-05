@@ -25,16 +25,18 @@
 			<img class="user-img" alt="profile" src="static/images/profile.jpg">
 			<h2 class="user-name">${userName}</h2>
 		</div>
-		<div class="friends-list"></div>
-		<c:forEach var="friend" items="${userInfo.friends}">
-			<div class="friends-list">
-				<div class="friend-info">
-					<img class="friend-img" alt="profile" src="static/images/profile.jpg">
-					<h2 class="friend-name">${friend}</h2>
+		<div class="friends-container">
+			<div class="friends-list"></div>
+			<c:forEach var="friend" items="${userInfo.friends}">
+				<div class="friends-list">
+					<div class="friend-info">
+						<img class="friend-img" alt="profile" src="static/images/profile.jpg">
+						<h2 class="friend-name">${friend}</h2>
+					</div>
+					<span><i class="fas fa-chevron-right"></i></span>
 				</div>
-				<span><i class="fas fa-chevron-right"></i></span>
-			</div>
-		</c:forEach>
+			</c:forEach>
+		</div>
 	</div>
 	<footer class="nav">
 		<div class="nav-contents">
@@ -60,10 +62,24 @@ const addFriendsBtn = document.querySelector('.fa-plus');
 const addFriendsModal = document.querySelector('.modal');
 const cancleModal = document.querySelector('.fa-times');
 const findUser = document.getElementById('search');
+const friendscontainer = document.querySelector('.friends-container');
 let friends = document.querySelectorAll('.friend-info > h2');
 
 const addFriends = val => {
-	location.href="/websocket/addFriends.do?searchId=" + val;
+	$.get("/websocket/addFriends.do?searchId=" + val, (data) => {
+		let friends = '';
+		console.log(data);
+		console.log(data.friends)
+		friendscontainer.innerHTML = '';
+		data.friends.map(value => {
+			friends += '<div class="friends-list"><div class="friend-info">'
+					+ '<img class="friend-img" alt="profile" src="static/images/profile.jpg">'
+					+ '<h2 class="friend-name">'+ value + '</h2></div>'
+					+ '<span><i class="fas fa-chevron-right"></i></span></div>';
+		})
+		friendscontainer.innerHTML = friends;
+		cancleModal.click();
+	})
 }
 addFriendsBtn.addEventListener('click', () => {
 	addFriendsModal.classList.remove('hidden');

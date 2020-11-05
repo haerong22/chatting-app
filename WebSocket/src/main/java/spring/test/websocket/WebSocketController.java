@@ -16,11 +16,14 @@ public class WebSocketController {
 	@Autowired
 	private ChatService service;
 	
-	@RequestMapping("/addFriends.do")
-	public String addFriends(UserDTO userDto, HttpServletRequest req) {
+	@ResponseBody
+	@RequestMapping(value = "/addFriends.do",
+				method=RequestMethod.GET)
+	public UserDTO addFriends(UserDTO userDto, HttpServletRequest req) {
 		userDto.setUserId((String) req.getSession().getAttribute("userName"));
 		int result = service.addFriends(userDto);
-		return "redirect: friends.do";
+		UserDTO userInfo = service.getUserInfo(userDto.getUserId());
+		return userInfo;
 	}
 	
 	@RequestMapping("/friends.do")
