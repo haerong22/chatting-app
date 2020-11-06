@@ -64,13 +64,15 @@ const cancleModal = document.querySelector('.fa-times');
 const findUser = document.getElementById('search');
 const friendscontainer = document.querySelector('.friends-container');
 let friends = document.querySelectorAll('.friend-info > h2');
-
+const chatting = (value) => {
+	location.href='/websocket/chat.do?friendName=' + value;
+}
 const addFriends = val => {
 	$.get("/websocket/addFriends.do?searchId=" + val, (data) => {
 		let friends = '';
 		friendscontainer.innerHTML = '';
 		data.friends.map(value => {
-			friends += '<div class="friends-list"><div class="friend-info">'
+			friends += '<div class="friends-list" onclick="chatting('+ value +')"><div class="friend-info">'
 					+ '<img class="friend-img" alt="profile" src="static/images/profile.jpg">'
 					+ '<h2 class="friend-name">'+ value + '</h2></div>'
 					+ '<span><i class="fas fa-chevron-right"></i></span></div>';
@@ -86,10 +88,6 @@ cancleModal.addEventListener('click', () => {
 	addFriendsModal.classList.add('hidden');
 })
 
-document.querySelector('.friends-list')
-	.addEventListener('click', () => {
-		location.href='/websocket/chat.do?userName=' + "${userName}";
-	});
 findUser.addEventListener('keyup', () => {
 	$.get("/websocket/findUser.do?search=" + findUser.value, function(data){
 		let users = '';

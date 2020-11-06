@@ -37,7 +37,7 @@ const connect = function(userName, friendName) {
 		msgBox.innerHTML += addmsg; 
 		document.getElementById('msg').value = '';
 	}
-	ws.close = () => {
+	ws.onclose = () => {
 		console.log('연결종료');
 		ws.send(JSON.stringify({
 			writer : nickname,

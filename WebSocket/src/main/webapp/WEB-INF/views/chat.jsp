@@ -34,7 +34,6 @@
 </body>
 <script>
 	connect("${userName}","${friendName}");
-	console.log("${friendName}");
 	ready();
 </script>
 </html>
