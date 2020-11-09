@@ -1,11 +1,9 @@
 package spring.test.websocket;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
@@ -16,6 +14,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Component
 public class ChatHandler extends TextWebSocketHandler {
+	@Autowired
+	private ChatService service;
+	
 	private final ObjectMapper objectMapper = new ObjectMapper();
 	private final Map<String, WebSocketSession> userSession = new HashMap<>();
 	private final Map<String, String> userId = new HashMap<>();
@@ -28,6 +29,7 @@ public class ChatHandler extends TextWebSocketHandler {
 		System.out.println(chatDto);
 		switch (chatDto.getType()) {
 		case CHAT : {
+			int result = service.addChatting(chatDto);
 			WebSocketSession ws = userSession.get(userId.get(chatDto.getReciever()));
 			if(ws != null) ws.sendMessage(new TextMessage(msg));
 			ws = userSession.get(userId.get(chatDto.getWriter()));

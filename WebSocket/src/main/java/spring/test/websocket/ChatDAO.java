@@ -15,4 +15,8 @@ public interface ChatDAO {
 
 	public UserDTO getUserInfo(String userId);
 
+	public int addChatting(ChatDTO chatDto);
+
+	public List<ChatDTO> getChatting(Map<String, String> map);
+
 }

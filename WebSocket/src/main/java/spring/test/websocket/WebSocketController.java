@@ -36,8 +36,10 @@ public class WebSocketController {
 	@RequestMapping("/chat.do")
 	public ModelAndView chatViewPage(String friendName, HttpServletRequest req) {
 		String userId = (String) req.getSession().getAttribute("userName");
+		List<ChatDTO> chatList = service.getChatting(userId, friendName);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("views/chat");
+		mav.addObject("chatList", chatList);
 		mav.addObject("friendName",friendName);
 		mav.addObject("userName", userId);
 		return mav;

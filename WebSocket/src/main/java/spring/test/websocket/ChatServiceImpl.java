@@ -13,6 +13,19 @@ public class ChatServiceImpl implements ChatService {
 	private ChatDAO dao;
 	
 	@Override
+	public List<ChatDTO> getChatting(String userId, String friendName) {
+		Map<String, String> map = new HashMap<>();
+		map.put("writer", userId);
+		map.put("reciever", friendName);
+		return dao.getChatting(map);
+	}
+	
+	@Override
+	public int addChatting(ChatDTO chatDto) {
+		return dao.addChatting(chatDto);
+	}
+	
+	@Override
 	public UserDTO getUserInfo(String userId) {
 		return dao.getUserInfo(userId);
 	}

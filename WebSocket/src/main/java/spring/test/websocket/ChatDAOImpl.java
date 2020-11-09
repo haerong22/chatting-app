@@ -19,6 +19,26 @@ public class ChatDAOImpl implements ChatDAO {
 	MongoTemplate mongoTemplate;
 	
 	@Override
+	public List<ChatDTO> getChatting(Map<String, String> map) {
+		List<ChatDTO> chatList = new ArrayList<>();
+			Query query = new Query(new Criteria().orOperator(
+					new Criteria().andOperator(Criteria.where("writer").in(map.get("writer")),
+					Criteria.where("reciever").in(map.get("reciever"))),
+					new Criteria().andOperator(Criteria.where("writer").in(map.get("reciever")),
+					Criteria.where("reciever").in(map.get("writer")))));
+			chatList =	Optional.ofNullable(mongoTemplate.find(query, ChatDTO.class, "chat"))
+					.orElseGet(()-> null);
+			System.out.println(chatList.stream().count());
+		return chatList;
+	}
+	
+	@Override
+	public int addChatting(ChatDTO chatDto) {
+		mongoTemplate.insert(chatDto, "chat");
+		return 1;
+	}
+	
+	@Override
 	public UserDTO getUserInfo(String userId) {
 		Query query = new Query()
 				.addCriteria(Criteria.where("userId").in(userId));

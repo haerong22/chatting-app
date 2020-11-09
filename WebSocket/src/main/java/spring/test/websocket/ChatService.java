@@ -14,4 +14,8 @@ public interface ChatService {
 
 	public UserDTO getUserInfo(String userId);
 
+	public int addChatting(ChatDTO chatDto);
+
+	public List<ChatDTO> getChatting(String userId, String friendName);
+
 }
