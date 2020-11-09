@@ -4,10 +4,20 @@ public class ChatDTO {
 	private String writer;
 	private String message;
 	private String reciever;
+	private String time;
 	private MessageType type;
 	
 	public enum MessageType {
 		ENTER, CHAT, LEAVE
+	}
+	
+	
+	public String getTime() {
+		return time;
+	}
+
+	public void setTime(String time) {
+		this.time = time;
 	}
 
 	public String getWriter() {

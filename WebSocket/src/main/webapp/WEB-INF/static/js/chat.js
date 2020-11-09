@@ -20,7 +20,7 @@ const connect = function(userName, friendName) {
 		if(jsonmsg.writer === nickname) {
 			addmsg += '<div class="message-row-own">';
 			addmsg += '<div class="message-info-own">';
-			addmsg += '<span class="message-time">22:07</span>'
+			addmsg += '<span class="message-time">'+ jsonmsg.time +'</span>'
 			addmsg += '<span class="message-own">' + jsonmsg.message + '</span>';
 			addmsg += '</div></div>';
 		} else {
@@ -30,7 +30,7 @@ const connect = function(userName, friendName) {
 			addmsg += '<span class="message-writer">' + jsonmsg.writer + '</span>'
 	 		addmsg += '<div class="message-info">'
 	 		addmsg += '<span class="message">'+ jsonmsg.message + '</span>'
-	 		addmsg += '<span class="message-time">22:07</span>'
+	 		addmsg += '<span class="message-time">'+ jsonmsg.time +'</span>'
 	 		addmsg += '</div></div></div>'
 		}
 		console.log(msg.data);
@@ -48,11 +48,15 @@ const connect = function(userName, friendName) {
 }
 
 const sendMessage = function() {
+	let date = new Date();
+	let minutes = date.getMinutes();
+	let time = date.getHours() + ":" + (minutes < 10 ? "0" + minutes: minutes);
 	let msg = document.getElementById('msg').value;
 	ws.send(JSON.stringify({
 		writer : nickname,
 		message : msg,
 		reciever : recieverName,
+		time : time,
 		type : 'CHAT'
 	}));
 	

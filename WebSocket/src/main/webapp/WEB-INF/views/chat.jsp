@@ -30,7 +30,7 @@
 				<c:if test="${userName eq chat.writer}">
 				<div class="message-row-own">
 					<div class="message-info-own">
-						<span class="message-time">22:07</span>
+						<span class="message-time">${chat.time}</span>
 						<span class="message-own">${chat.message}</span>
 					</div>
 				</div>
@@ -43,7 +43,7 @@
 						<span class="message-writer">${chat.writer}</span>
 						<div class="message-info">
 							<span class="message">${chat.message}</span>
-							<span class="message-time">22:07</span>
+							<span class="message-time">${chat.time}</span>
 						</div>
 					</div>
 				</div>
