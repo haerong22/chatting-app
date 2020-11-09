@@ -1,7 +1,3 @@
----
-typora-copy-images-to: images
----
-
 # 까까오 톡
 
 - 회원가입
